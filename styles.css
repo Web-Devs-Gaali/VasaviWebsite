@@ -32,16 +32,14 @@ html,body
 	text-align: center;
 	padding: 10px;
 }
-#navbar-collapse-1
-{
-	font-size: 15px;
-			
-}
 
 #logo
 {	
 	float: left;
 }
+/*Navbar*/
+
+
 /*Carousel related stylings*/
 #image-carousel
 {
