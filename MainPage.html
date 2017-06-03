@@ -12,17 +12,12 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <!--Custom style sheet-->
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
   <style type="text/css" media="screen">
 
   </style>
-  <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() 
-    		{
-    			var today = new Date();
-    			var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    			$('#date').html("Date: " + today.toLocaleDateString('en-US', options));
-    		});
+  <script src="js/script.js" type="text/javascript" charset="utf-8">
+    
   </script>
 </head>
 
@@ -31,19 +26,31 @@
     <nav class="navbar navbar-inverse bg-danger">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+          </button>
           <a class="navbar-branch" href="http://vce.ac.in">
             <img src="logo.png" class="img-rounded" id="logo" alt="logo" height="60px" width="60px">
+            <h2 style="display:inline-block; text-decoration: none;" align="center" class="text-uppercase text-info"> Vasavi college Of Engineering</h2>
           </a>
-          <h2 style="display:inline-block" class="text-uppercase text-info"> Vasavi college Of Engineering</h2>
+          
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#"><span class="glyphicon glyphicon-home"></span>Home</a>
+              <a href="#"><span class="glyphicon glyphicon-home"></span> Home</a>
             </li>
             <li>
               <a href="#"><span class="glyphicon glyphicon-phone"></span> Contact Us</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -96,7 +103,8 @@
     </div>
     <div class="row">
       <div class="col-md-4 date-address">
-        <div id="address"> Ibrahimbagh, Hyderabad - 500031, India </div> <strong>
+        <div id="address"> Ibrahimbagh, Hyderabad - 500031, India </div>
+        		 <strong>
 					<div id="date">
 						Date:
 					</div>

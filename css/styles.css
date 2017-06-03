@@ -37,6 +37,30 @@ html,body
 	font-size: 15px;
 			
 }
+/*In order make it look good in mobile view*/
+#nav-header
+{
+	position: absolute;
+	text-align: center;
+	margin: auto;
+}
+
+#name-in-header
+{
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	position: relative;
+	padding: 10px;
+}
+/*Nav bar related stylings*/
+.navbar
+{	border-radius:0;
+	min-height:50px;
+
+}
+
+
 
 #logo
 {	
