@@ -54,53 +54,21 @@ html,body
 	padding: 10px;
 }
 /*Nav bar related stylings*/
-#nav-bar.navbar-default .navbar-brand 
-{
-    color: rgba(255, 255, 255, 1);
+.navbar
+{	border-radius:0;
+	
+
 }
-#nav-bar.navbar-default 
-{
-    font-size: 15px;
-    background-color: rgba(69, 69, 69, 1);
-    border-bottom-width: 1px;
-}
-#nav-bar.navbar-default .navbar-nav>li>a 
-{
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(69, 69, 69, 1);
-}
-#nav-bar.navbar-default .navbar-nav>li>a:hover,
-#nav-bar.navbar-default .navbar-nav>li>a:focus 
-{
-    color: rgba(17, 17, 17, 1);
-    background-color: rgba(160, 160, 160, 1);
-}
-#nav-bar.navbar-default .navbar-nav>.active>a,
-#nav-bar.navbar-default .navbar-nav>.active>a:hover,
-#nav-bar.navbar-default .navbar-nav>.active>a:focus 
-{
-    color: rgba(0, 0, 0, 1);
-    background-color: rgba(220, 220, 220, 1);
-}
-#nav-bar.navbar-default .navbar-toggle 
-{
-    border-color: #dcdcdc;
-}
-#nav-bar.navbar-default .navbar-toggle:hover,
-#nav-bar.navbar-default .navbar-toggle:focus 
-{
-    background-color: #dcdcdc;
-}
-#nav-bar.navbar-default .navbar-toggle .icon-bar 
-{
-    background-color: #dcdcdc;
-}
-#nav-bar.navbar-default .navbar-toggle:hover .icon-bar,
-#nav-bar.navbar-default .navbar-toggle:focus .icon-bar 
-{
-    background-color: #454545;
+.navbar .nav > li > a {
+  line-height: 20px;
 }
 
+
+#logo
+{	 float: left;
+        
+	
+}
 /*Carousel related stylings*/
 #image-carousel
 {
