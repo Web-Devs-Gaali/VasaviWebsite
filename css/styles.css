@@ -32,45 +32,18 @@ html,body
 	text-align: center;
 	padding: 10px;
 }
-#navbar-collapse-1
-{
-	font-size: 15px;
-			
-}
-/*In order make it look good in mobile view*/
-#nav-header
-{
-	position: absolute;
-	text-align: center;
-	margin: auto;
-}
-
-#name-in-header
-{
-	font-weight: bold;
-	font-size: 20px;
-	color: white;
-	position: relative;
-	padding: 10px;
-}
-/*Nav bar related stylings*/
-.navbar
-{	border-radius:0;
-	min-height:50px;
-
-}
-
-
 
 #logo
 {	
 	float: left;
 }
+/*Navbar*/
+
+
 /*Carousel related stylings*/
 #image-carousel
 {
-	height: auto;
-	width: auto;
+	max-height: 500px;
 }	
 .carousel .carousel-inner .item img {
     width: 100%;
