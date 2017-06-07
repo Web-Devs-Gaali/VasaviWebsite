@@ -2,8 +2,63 @@ html,body
 {
 	scroll-behavior: smooth;
 }
+/*Stylings for login page*/
+body {
+    background: #eee !important;    
+}
+
+.wrapper {  
+    margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+}
+
+ .form-signin .form-signin-heading,
+    .checkbox {
+      margin-bottom: 30px;
+    }
+
+   .form-signin .checkbox {
+      font-weight: normal;
+    }
+
+   .form-signin .form-control {
+      position: relative;
+      font-size: 16px;
+      height: auto;
+      padding: 10px;
+        }
+
+    .form-signin .form-control &:focus {
+          z-index: 2;
+        }
+    
+
+   .form-control input[type="text"] {
+      margin-bottom: -1px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+   .form-control input[type="password"] {
+      margin-bottom: 20px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+
+/*End of login page styling*/
 .news-events
 {
+	margin: 10px;
+	padding: 5px;
 	text-shadow: 2px 2px grey;
 	border: 2px groove #bfbfbf;
 	border-radius: 10px;
@@ -15,6 +70,8 @@ html,body
 }
 .date-address
 {
+	margin: 10px;
+	padding: 5px;
 	border: 2px groove #bfbfbf;
 	border-radius: 10px;
 }
@@ -32,49 +89,32 @@ html,body
 	text-align: center;
 	padding: 10px;
 }
-#navbar-collapse-1
-{
-	font-size: 15px;
-			
-}
-/*In order make it look good in mobile view*/
-#nav-header
-{
-	position: absolute;
-	text-align: center;
-	margin: auto;
-}
-
-#name-in-header
-{
-	font-weight: bold;
-	font-size: 20px;
-	color: white;
-	position: relative;
-	padding: 10px;
-}
-/*Nav bar related stylings*/
-.navbar
-{	border-radius:0;
-	min-height:50px;
-
-}
-
-
 
 #logo
 {	
 	float: left;
 }
+/*Navbar*/
+#navbar-nav {
+    width: 100%;
+    text-align: center;
+}
+#navbar-nav>li 
+{
+    float: none;
+    display: inline-block;
+}
 /*Carousel related stylings*/
 #image-carousel
 {
-	height: auto;
-	width: auto;
-}	
-.carousel .carousel-inner .item img {
-    width: 100%;
     height: 100%;
+    width: 100%;
+    max-height: 500px;
+}	
+.carousel .carousel-inner .item img 
+{
+    height: 100%;
+    width: 100%;
     max-height: 500px;
 }
 .carousel .carousel-indicators li {
