@@ -1,11 +1,9 @@
 html,body
 {
 	scroll-behavior: smooth;
+    margin: 0px;
 }
 /*Stylings for login page*/
-body {
-    background: #eee !important;    
-}
 
 .wrapper {  
     margin-top: 80px;
