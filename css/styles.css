@@ -57,9 +57,9 @@ body {
 /*End of login page styling*/
 .news-events
 {
+	align:center;
 	margin: 10px;
 	padding: 5px;
-	text-shadow: 2px 2px grey;
 	border: 2px groove #bfbfbf;
 	border-radius: 10px;
 }
