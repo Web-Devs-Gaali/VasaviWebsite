@@ -1,38 +1,73 @@
 <?php
-	$username = "1602-15-737-073"; 
-$password = "chlore"; 
-$fields = "txtLoginID=" . $username . "&txtPWD=" . $password . "&btnLogin=true"; 
-$ch=curl_init(); 
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
+//default raw post data for Vasavi website
+//__VIEWSTATE=%2FwEPDwUKLTQzMjczNTk1OGRkSy5aZPIQCRnICRqsFtUMVV1Z1QE%3D&__VIEWSTATEGENERATOR=90059987&__EVENTVALIDATION=%2FwEWBAKF5%2BfkAwKdhdqTCgK9%2B7qcDgKC3IeGDO3I%2BiWkJ3Y14PHPL718yo5yjQgY&txtLoginID=1602-15-737-073&txtPWD=chlore&btnLogin=Go%21
+//Upload a blank cookie.txt to the same directory as this file with a CHMOD/Permission to 777
 
-curl_setopt($ch, CURLOPT_URL, 'http://vce.ac.in/index.aspx'); 
-curl_setopt($ch, CURLOPT_HEADER, 0); 
-curl_setopt($ch, CURLOPT_COOKIEJAR, "ASPSESSIONIDSQADDRBQ=OCALKIGABGLPCJLKMGIKJLLF"); //I got this exact cookiename from LiveHTTPheaders (Firefox extension)
-curl_setopt($ch, CURLOPT_COOKIEFILE, "ASPSESSIONIDSQADDRBQ=OCALKIGABGLPCJLKMGIKJLLF"); 
-curl_setopt($ch, CURLOPT_COOKIESESSION, TRUE); 
-curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1000 ); 
-curl_setopt($ch, CURLOPT_TIMEOUT, 10000 ); 
-curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.8) Gecko/20061025 Firefox/1.5.0.8' ); 
-curl_setopt($ch, CURLOPT_AUTOREFERER, 1 ); 
-curl_setopt ($ch, CURLOPT_REFERER, "http://vce.ac.in"); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0 ); 
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0 ); 
-curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
-curl_setopt($ch, CURLOPT_POST, 1); 
-curl_setopt($ch, CURLOPT_POSTFIELDS, $fields); 
-ob_start(); //the issue with the script remains with/without ob_start/ob_end_clean
-$raw_data=curl_exec($ch); 
-curl_setopt($ch, CURLOPT_POST, 0); //at this point im trying to get another page using curl. since i will not be using post i have set it to 0.
-curl_setopt($ch, CURLOPT_URL, 'http://vce.ac.in'); 
-$ttable = curl_exec($ch); 
-ob_end_clean(); 
-echo $ttable; 
-//curl_close($ch); 
-//$raw_data = preg_replace('/\s(1,)/',' ',$raw_data); //clean it up 
-//echo $raw_data; 
-//$raw_data = stripslashes($raw_data); 
-//$raw_data = explode("<strong>",$raw_data); 
-//2 3 and 4 
-//echo htmlentities($raw_data[4]); 
+function login($url,$data)
+{
+  $fp = fopen("cookie.txt", "w");
+  fclose($fp);
+  $login = curl_init();
+  curl_setopt($login, CURLOPT_COOKIEJAR, "cookie.txt");
+  curl_setopt($login, CURLOPT_COOKIEFILE, "cookie.txt");
+  curl_setopt($login, CURLOPT_TIMEOUT, 40000);
+  curl_setopt($login, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($login, CURLOPT_URL, $url);
+  curl_setopt($login, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+  curl_setopt($login, CURLOPT_FOLLOWLOCATION, TRUE);
+  curl_setopt($login, CURLOPT_POST, TRUE);
+  curl_setopt($login, CURLOPT_POSTFIELDS, $data);
+  ob_start();
+  return curl_exec ($login);
+  ob_end_clean();
+  curl_close ($login);
+  unset($login);
+}
+
+function grab_page($site)
+{
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+  curl_setopt($ch, CURLOPT_TIMEOUT, 40);
+  curl_setopt($ch, CURLOPT_COOKIEFILE, "cookie.txt");
+  curl_setopt($ch, CURLOPT_URL, $site);
+  ob_start();
+  return curl_exec ($ch);
+  ob_end_clean();
+  curl_close ($ch);
+}
+
+function post_data($site,$data)
+{
+  $datapost = curl_init();
+  $headers = array("Expect:");
+  curl_setopt($datapost, CURLOPT_URL, $site);
+  curl_setopt($datapost, CURLOPT_TIMEOUT, 40000);
+  curl_setopt($datapost, CURLOPT_HEADER, TRUE);
+  curl_setopt($datapost, CURLOPT_HTTPHEADER, $headers);
+  curl_setopt($datapost, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+  curl_setopt($datapost, CURLOPT_POST, TRUE);
+  curl_setopt($datapost, CURLOPT_POSTFIELDS, $data);
+  curl_setopt($datapost, CURLOPT_COOKIEFILE, "cookie.txt");
+  ob_start();
+  return curl_exec ($datapost);
+  ob_end_clean();
+  curl_close ($datapost);
+  unset($datapost);
+}
+
+function get_details()
+{
+  $loginID = $_POST['username'];
+  $password = $_POST['password'];
+  $testData = "__VIEWSTATE=%2FwEPDwUKLTQzMjczNTk1OGRkSy5aZPIQCRnICRqsFtUMVV1Z1QE%3D&__VIEWSTATEGENERATOR=90059987&__EVENTVALIDATION=%2FwEWBAKF5%2BfkAwKdhdqTCgK9%2B7qcDgKC3IeGDO3I%2BiWkJ3Y14PHPL718yo5yjQgY&txtLoginID=".$loginID."&txtPWD=".$password."&btnLogin=Go%21";
+  
+  login("http://vce.ac.in/index.aspx",$testData);
+  
+  echo grab_page("http://vce.ac.in/Student_Info.aspx");
+}
+
+get_details();
+
 ?> 
-
