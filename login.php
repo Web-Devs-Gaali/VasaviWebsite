@@ -68,6 +68,22 @@ function get_details()
   echo grab_page("http://vce.ac.in/Student_Info.aspx");
 }
 
-get_details();
+/////code implementatiom/////
+$loggedIn;
+if($loggedIn)
+{
+	echo grab_page("http://vce.ac.in/Student_Info.aspx");
+}
+else
+{
+	ob_start ();
+	require ('login.html');
+	if($_POST)
+	{	
+		$html = ob_get_clean ();
+		get_details();
+		$loggedIn = TRUE;
+	}	
+}
 
 ?> 
