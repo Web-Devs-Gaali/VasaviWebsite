@@ -97,7 +97,10 @@ function get_details($rawData)
   
   login("http://vce.ac.in/index.aspx",$loginData);
   
-  echo grab_page("http://vce.ac.in/Student_Info.aspx");
+  $grabHtml = grab_page("http://vce.ac.in/Student_Info.aspx");
+  //save this to a cookie
+  //helper function to identify div tags
+  //changes here
 }
 
 /////code implementatiom/////
