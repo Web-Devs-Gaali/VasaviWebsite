@@ -1,6 +1,7 @@
 html,body
 {
 	scroll-behavior: smooth;
+	 background-image: url("http://img.freepik.com/free-vector/abstract-beautiful-mandala-design-background_1055-2471.jpg?size=158c&ext=jpg");
 }
 .news-events
 {
@@ -8,6 +9,7 @@ html,body
 	border: 2px groove #bfbfbf;
 	border-radius: 10px;
 }
+
 #address
 {
 	text-align: center;
