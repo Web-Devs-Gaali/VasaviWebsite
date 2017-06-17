@@ -2,6 +2,37 @@
 //default raw post data for Vasavi website
 //__VIEWSTATE=%2FwEPDwUKLTQzMjczNTk1OGRkSy5aZPIQCRnICRqsFtUMVV1Z1QE%3D&__VIEWSTATEGENERATOR=90059987&__EVENTVALIDATION=%2FwEWBAKF5%2BfkAwKdhdqTCgK9%2B7qcDgKC3IeGDO3I%2BiWkJ3Y14PHPL718yo5yjQgY&txtLoginID=1602-15-737-073&txtPWD=chlore&btnLogin=Go%21
 //Upload a blank cookie.txt to the same directory as this file with a CHMOD/Permission to 777
+// get simple_html_dom.php from : https://netix.dl.sourceforge.net/project/simplehtmldom/simple_html_dom.php
+require_once('simple_html_dom.php');
+
+function get_raw($url)
+{
+
+   $html = file_get_html( $url );
+
+   foreach ($html->find('input') as $input){
+       # echo "INPUTDOM". print_r($input);
+       if ($input->attr['name']=="__VIEWSTATE"){
+           //__VIEWSTATE
+           //echo "__VIEWSTATE: {$input->attr['value']}\n";
+           $form_data['__VIEWSTATE'] = $input->attr['value'];
+
+       } elseif ($input->attr['name']=="__VIEWSTATEGENERATOR"){
+           //__VIEWSTATEGENERATOR
+           //echo "__VIEWSTATEGENERATOR: {$input->attr['value']}\n";
+           $form_data['__VIEWSTATEGENERATOR'] = $input->attr['value'];
+
+       } elseif ($input->attr['name']=="__EVENTVALIDATION"){
+           //__EVENTVALIDATION
+           //echo "__EVENTVALIDATION: {$input->attr['value']}\n";
+           $form_data['__EVENTVALIDATION'] = $input->attr['value'];
+
+       }
+   };
+
+   return $form_data;
+
+}
 
 function login($url,$data)
 {
@@ -57,33 +88,26 @@ function post_data($site,$data)
   unset($datapost);
 }
 
-function get_details()
+function get_details($rawData)
 {
   $loginID = $_POST['username'];
   $password = $_POST['password'];
-  $testData = "__VIEWSTATE=%2FwEPDwUKLTQzMjczNTk1OGRkSy5aZPIQCRnICRqsFtUMVV1Z1QE%3D&__VIEWSTATEGENERATOR=90059987&__EVENTVALIDATION=%2FwEWBAKF5%2BfkAwKdhdqTCgK9%2B7qcDgKC3IeGDO3I%2BiWkJ3Y14PHPL718yo5yjQgY&txtLoginID=".$loginID."&txtPWD=".$password."&btnLogin=Go%21";
+
+  $loginData = "__VIEWSTATE=".urlencode($rawData['__VIEWSTATE'])."&__VIEWSTATEGENERATOR=".urlencode($rawData['__VIEWSTATEGENERATOR'])."&__EVENTVALIDATION=".urlencode($rawData['__EVENTVALIDATION'])."&txtLoginID=".$loginID."&txtPWD=".$password."&btnLogin=Go%21";
   
-  login("http://vce.ac.in/index.aspx",$testData);
+  login("http://vce.ac.in/index.aspx",$loginData);
   
   echo grab_page("http://vce.ac.in/Student_Info.aspx");
 }
 
 /////code implementatiom/////
-$loggedIn;
-if($loggedIn)
-{
-	echo grab_page("http://vce.ac.in/Student_Info.aspx");
-}
-else
-{
-	ob_start ();
-	require ('login.html');
+	
+	include('login.html');
 	if($_POST)
-	{	
-		$html = ob_get_clean ();
-		get_details();
-		$loggedIn = TRUE;
-	}	
-}
-
+	{
+		$html = ob_end_clean();
+		get_details(get_raw('http://vce.ac.in/index.aspx'));
+	}
+	
+	
 ?> 
